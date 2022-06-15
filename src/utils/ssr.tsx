@@ -34,7 +34,7 @@ export const getGetStaticProps: <T extends ParsedUrlQuery>(
 
     return {
       props: {
-        name: context?.params?.name,
+        ...context.params,
         dehydratedState: dehydrate(queryClient),
       },
     };
