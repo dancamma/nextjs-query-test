@@ -3,7 +3,8 @@ import type { NextPage } from "next";
 import { useDebounce } from "use-debounce";
 import { useQuery } from "react-query";
 import { gql } from "graphql-request";
-import { pokemonClient } from "../utils/pokemon";
+import { pokemonClient } from "../../utils/pokemon";
+import { PokemonQuery, PokemonQueryVariables } from "../../generated/graphql";
 
 const POKEMON = gql`
   query Pokemon($name: String!) {
@@ -52,14 +53,14 @@ const POKEMON = gql`
 `;
 
 const fetchPokemon = async (name: string) =>
-  pokemonClient.request(POKEMON, { name });
+  pokemonClient.request<PokemonQuery, PokemonQueryVariables>(POKEMON, { name });
 
 const PokemonDetail: NextPage = () => {
   const { data } = useQuery(["searchPokemons"], () => fetchPokemon("pikachu"));
   return (
     <div className="">
-      <h1 className="text-3xl">Hello from people!</h1>;
-      <div>{JSON.stringify(data)}</div>
+      <h1 className="text-3xl">Hello from people!</h1>
+      <div>{data?.pokemon?.name}</div>
     </div>
   );
 };
