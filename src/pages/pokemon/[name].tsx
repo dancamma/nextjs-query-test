@@ -10,6 +10,7 @@ import {
   PokemonsQuery,
   PokemonsQueryVariables,
 } from "../../generated/graphql";
+import { Pokemon } from "../../components/Pokemon";
 
 const POKEMONS = gql`
   query Pokemons {
@@ -70,20 +71,12 @@ const fetchPokemon = async (name: string) =>
 
 const PokemonDetail: NextPage<{ name: string }> = ({ name }) => {
   const { data } = useQuery(["getPokemon", name], () => fetchPokemon(name), {});
-  return (
-    <div className="">
-      <h1 className="text-3xl">Hello from people!</h1>
-      <div>{data?.pokemon?.name}</div>
-    </div>
-  );
+  return data?.pokemon ? <Pokemon pokemon={data?.pokemon} /> : null;
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const name = context.params?.name as string;
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(["getPokemon", name], () =>
-    fetchPokemon(name)
-  );
 
   return {
     props: {
