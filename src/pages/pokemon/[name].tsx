@@ -13,7 +13,7 @@ import {
 
 const POKEMONS = gql`
   query Pokemons {
-    pokemons(first: 151) {
+    pokemons(first: 10) {
       id
       name
     }
@@ -100,7 +100,7 @@ export const getStaticPaths: GetStaticPaths<{ name: string }> = async () => {
   >(POKEMONS);
   console.log(pokemons);
   return {
-    fallback: false,
+    fallback: "blocking",
     paths:
       pokemons?.map((pokemon) => ({
         params: { name: pokemon?.name?.toLowerCase() || "" },
