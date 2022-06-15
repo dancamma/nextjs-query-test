@@ -3,10 +3,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { PokemonQuery, PokemonQueryVariables } from "../../generated/graphql";
 import { pokemonClient } from "../../utils/pokemon";
-
-interface Props {
-  name: string;
-}
+import { useRouter } from "next/router";
 
 const POKEMON = gql`
   query Pokemon($name: String!) {
@@ -61,7 +58,9 @@ const fetchPokemon = async (name: string) => {
   });
 };
 
-export const Pokemon: React.FC<Props> = ({ name }) => {
+export const Pokemon: React.FC = () => {
+  const router = useRouter();
+  const name = router.query.name as string;
   const { data } = useQuery(["getPokemon", name], () => fetchPokemon(name));
 
   return (

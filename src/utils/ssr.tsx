@@ -3,6 +3,7 @@ import { ParsedUrlQuery } from "querystring";
 import React from "react";
 import { dehydrate, QueryClient, QueryClientProvider } from "react-query";
 import ssrPrepass from "react-ssr-prepass";
+import { createMockRouter } from "next-router-provider";
 
 export const getGetStaticProps: <T extends ParsedUrlQuery>(
   Component: React.FC<T>
@@ -12,10 +13,21 @@ export const getGetStaticProps: <T extends ParsedUrlQuery>(
       defaultOptions: { queries: { suspense: true } },
     });
 
+    const router = createMockRouter({
+      pathname: "",
+      query: (context.params as Record<string, string>) || {},
+    });
+
+    const { RouterContext } = await import(
+      "next/dist/shared/lib/router-context"
+    );
+
     const element = (
-      <QueryClientProvider client={queryClient}>
-        {context.params && <Component {...context.params} />}
-      </QueryClientProvider>
+      <RouterContext.Provider value={router}>
+        <QueryClientProvider client={queryClient}>
+          {context.params && <Component {...context.params} />}
+        </QueryClientProvider>
+      </RouterContext.Provider>
     );
 
     await ssrPrepass(element);

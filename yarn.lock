@@ -8480,6 +8480,11 @@ nested-error-stacks@^2.0.0, nested-error-stacks@^2.1.0:
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.1.tgz#26c8a3cee6cc05fbcf1e333cd2fc3e003326c0b5"
   integrity sha512-9iN1ka/9zmX1ZvLV9ewJYEk9h7RyRRtqdK0woXcqohu8EWIerfPUjYJPg0ULy0UqP7cslmdGc8xKDJcojlKiaw==
 
+next-router-provider@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/next-router-provider/-/next-router-provider-0.6.0.tgz#fdf251c4dd5ab091ae5a788b7c2721923dd64283"
+  integrity sha512-CAAxH8EnauaJb14xyCqYLPwqydHWpeceFwGL255ss7RTSBkcqEFo/skN1nDQ/Yc0ps0HwBnMx05mHVgJnmiC4w==
+
 next@12.1.6:
   version "12.1.6"
   resolved "https://registry.yarnpkg.com/next/-/next-12.1.6.tgz#eb205e64af1998651f96f9df44556d47d8bbc533"

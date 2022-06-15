@@ -3,12 +3,7 @@ import type { NextPage, GetStaticPaths, GetStaticProps } from "next";
 import { useQuery } from "react-query";
 import { gql } from "graphql-request";
 import { pokemonClient } from "../../utils/pokemon";
-import {
-  PokemonQuery,
-  PokemonQueryVariables,
-  PokemonsQuery,
-  PokemonsQueryVariables,
-} from "../../generated/graphql";
+import { PokemonsQuery, PokemonsQueryVariables } from "../../generated/graphql";
 import { Pokemon } from "../../components/Pokemon";
 import { ParsedUrlQuery } from "querystring";
 import { getGetStaticProps } from "../../utils/ssr";
@@ -25,8 +20,8 @@ interface PageProps extends ParsedUrlQuery {
   name: string;
 }
 
-const PokemonDetail: NextPage<PageProps> = ({ name }) => {
-  return <Pokemon name={name} />;
+const PokemonDetail: NextPage<PageProps> = () => {
+  return <Pokemon />;
 };
 
 export const getStaticProps: GetStaticProps<{}, PageProps> =
